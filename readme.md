@@ -1,5 +1,12 @@
+for misskey only
+
 you can find your userId here
 `https://[instanceDomain]/settings/account-info`
+
+you should create api token first. \
+Settings -> other settings -> API -> create token \
+choose `writting or deleting notes` \
+then create token, you will get your token (it's a string in random charaters)
 
 ----
 
