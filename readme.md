@@ -12,4 +12,4 @@ you can find your userId here
 ~~`application/activity+json","href":"https://[instanceDomain]/users/[userId]`~~
 
 
-[Download .exe file](https://github.com/Hana-ame/missakujo/releases/tag/v0.0.0])
+[Download .exe file](https://github.com/Hana-ame/missakujo/releases/tag/v0.0.0)
