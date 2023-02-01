@@ -256,13 +256,17 @@ func getPlainTextReader(body io.ReadCloser, encoding string) io.ReadCloser {
 	case "gzip":
 		reader, err := gzip.NewReader(body)
 		if err != nil {
-			log.Fatal("error decoding gzip response", reader)
+			log.Println("error decoding gzip response", reader)
+			log.Println("will return raw body")
+			return body
 		}
 		return reader
 	case "br":
 		reader := brotli.NewReader(body)
 		if reader == nil {
-			log.Fatal("error decoding br response", reader)
+			log.Println("error decoding br response", reader)
+			log.Println("will return raw body")
+			return body
 		}
 		return io.NopCloser(reader)
 	default:
