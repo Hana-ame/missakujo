@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/hana-ame/missakujo/utils"
+	"github.com/Hana-ame/missakujo/utils"
 
 	"github.com/gofiber/fiber/v2"
 )

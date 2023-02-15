@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/hana-ame/missakujo/utils"
+	"github.com/Hana-ame/missakujo/utils"
 
 	"github.com/andybalholm/brotli"
 	"github.com/google/uuid"
