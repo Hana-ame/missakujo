@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"log"
 	"missakujo/utils"
 	"os"
 	"time"
@@ -54,7 +55,7 @@ func App() *fiber.App {
 	app.Get("/:sessionID", func(c *fiber.Ctx) error {
 		sid := c.Params("sessionID")
 		// fmt.Println(sid)
-		lm.Put(sid, time.Now().Unix()+300)
+		lm.Put(sid, time.Now().Unix()+30)
 
 		file, err := os.OpenFile(sid+".txt", os.O_RDONLY, 0644)
 		if err != nil {
@@ -63,6 +64,7 @@ func App() *fiber.App {
 			})
 		}
 		buf, err := io.ReadAll(file)
+		file.Close()
 		if err != nil {
 			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 				"error": err.Error(),
@@ -80,11 +82,13 @@ func App() *fiber.App {
 			lm.Iter(func(key string, v any) {
 				vv, err := utils.GetWithType[int64](v)
 				if err != nil {
+					log.Println(err)
 					return
 				}
 
 				if vv < time.Now().Unix() {
-					os.Remove(key + ".txt")
+					err := os.Remove(key + ".txt")
+					log.Println(err)
 					lm.Remove(key)
 				}
 			})

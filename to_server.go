@@ -133,6 +133,7 @@ func HandleDelete(
 		}
 	}
 
+	// fmt.Println(sessionId, "end")
 }
 
 func getApis(

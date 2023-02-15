@@ -15,8 +15,8 @@ func tester[T any](v any) (vv T, err error) {
 
 	vv = v.(T)
 	return
-
 }
+
 func TestXxx(t *testing.T) {
 
 	a, err := tester[string](1)
