@@ -37,8 +37,8 @@ func Wrapper(ctx *DelReqCtx) string {
 
 	offset := ctx.TimeOffset
 
-	sinceInt := ctx.Since // .UnixMilli()
-	untilInt := ctx.Until // .UnixMilli()
+	sinceInt := int64(ctx.Since) // .UnixMilli()
+	untilInt := int64(ctx.Until) // .UnixMilli()
 
 	sinceInt -= int64(offset) * 1000
 	untilInt -= int64(offset) * 1000

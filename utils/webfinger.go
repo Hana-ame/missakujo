@@ -3,7 +3,6 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"strings"
 )
@@ -32,16 +31,20 @@ func ResolveUser(name string) (string, error) {
 	}
 	username, host := arr[0], arr[1]
 
+	// fmt.Println("https://" + host + "/.well-known/webfinger?resource=acct:" + username + "@" + host)
 	resp, err := http.Get("https://" + host + "/.well-known/webfinger?resource=acct:" + username + "@" + host)
 	if err != nil {
 		return "", err
 	}
 	defer resp.Body.Close()
 
-	var res *Resource
+	// s, _ := io.ReadAll(resp.Body)
+	// fmt.Println(string(s))
+
+	var res Resource
 	json.NewDecoder(resp.Body).Decode(&res)
 
-	log.Println(res)
+	// log.Println(res)
 
 	for _, link := range res.Links {
 		if link.Rel == "self" {

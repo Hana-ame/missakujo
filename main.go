@@ -11,11 +11,11 @@ import (
 )
 
 type DelReqCtx struct {
-	Host  string `json:"host"`
-	User  string `json:"user"`
-	Token string `json:"token"`
-	Since int64  `json:"since"`
-	Until int64  `json:"until"`
+	Host  string  `json:"host"`
+	User  string  `json:"user"`
+	Token string  `json:"token"`
+	Since float64 `json:"since"`
+	Until float64 `json:"until"`
 
 	RenoteLessThan int `json:"renoteLessThan"`
 
@@ -34,6 +34,7 @@ func App() *fiber.App {
 
 	app.Post("/delete", func(c *fiber.Ctx) error {
 		req := new(DelReqCtx)
+		// req := new(map[string]any)
 
 		err := c.BodyParser(req)
 		if err != nil {
@@ -43,6 +44,7 @@ func App() *fiber.App {
 		}
 
 		// fmt.Println(req)
+		// fmt.Printf("%T", (*req)["since"])
 		// return nil
 
 		sid := Wrapper(req)
