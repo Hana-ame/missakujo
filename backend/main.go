@@ -113,9 +113,3 @@ func App() *fiber.App {
 
 	return app
 }
-
-func main() {
-	app := App()
-
-	app.Listen(":3000")
-}
