@@ -14,15 +14,15 @@ type DelReqCtx struct {
 	Host  string `json:"host"`
 	User  string `json:"user"`
 	Token string `json:"token"`
-	Since string `json:"since"`
-	Until string `json:"until"`
+	Since int64  `json:"since"`
+	Until int64  `json:"until"`
 
 	RenoteLessThan int `json:"renoteLessThan"`
 
 	TimeOffset int `json:"timeOffset"`
 
-	DeleteReply  string `json:"deleteReply"`
-	DeleteRenote string `json:"deleteRenote"`
+	DeleteReply  bool `json:"deleteReply"`
+	DeleteRenote bool `json:"deleteRenote"`
 }
 
 const timeForm = "2006-01-02 15:04:05"
@@ -52,7 +52,7 @@ func App() *fiber.App {
 		})
 	})
 
-	app.Get("/:sessionID", func(c *fiber.Ctx) error {
+	app.Get("/log/:sessionID", func(c *fiber.Ctx) error {
 		sid := c.Params("sessionID")
 		// fmt.Println(sid)
 		lm.Put(sid, time.Now().Unix()+30)
@@ -74,6 +74,19 @@ func App() *fiber.App {
 		n, err := c.Status(fiber.StatusOK).Write(buf)
 		_ = n
 		return err
+	})
+
+	app.Get("/webfinger/:acct", func(c *fiber.Ctx) error {
+		acct := c.Params("acct")
+		userId, err := utils.ResolveUser(acct)
+		if err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": err.Error(),
+			})
+		}
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"userId": userId,
+		})
 	})
 
 	go func() {

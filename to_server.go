@@ -26,22 +26,29 @@ func Wrapper(ctx *DelReqCtx) string {
 	}
 	sessionID := u.String()
 
-	since, err := time.Parse(timeForm, ctx.Since)
-	if err != nil {
-		return err.Error()
-	}
-	until, err := time.Parse(timeForm, ctx.Until)
-	if err != nil {
-		return err.Error()
-	}
+	// since, err := time.Parse(timeForm, ctx.Since)
+	// if err != nil {
+	// 	return err.Error()
+	// }
+	// until, err := time.Parse(timeForm, ctx.Until)
+	// if err != nil {
+	// 	return err.Error()
+	// }
 
 	offset := ctx.TimeOffset
 
-	sinceInt := since.UnixMilli()
-	untilInt := until.UnixMilli()
+	sinceInt := ctx.Since // .UnixMilli()
+	untilInt := ctx.Until // .UnixMilli()
 
 	sinceInt -= int64(offset) * 1000
 	untilInt -= int64(offset) * 1000
+
+	b2s := func(b bool) string {
+		if b {
+			return "true"
+		}
+		return "false"
+	}
 
 	go HandleDelete(
 		ctx.Host,
@@ -49,7 +56,7 @@ func Wrapper(ctx *DelReqCtx) string {
 		ctx.Token,
 		sinceInt, untilInt,
 		ctx.RenoteLessThan,
-		ctx.DeleteRenote, ctx.DeleteReply,
+		b2s(ctx.DeleteRenote), b2s(ctx.DeleteReply),
 		sessionID,
 	)
 
