@@ -1,4 +1,4 @@
-module missakujo
+module github.com/hana-ame/missakujo
 
 go 1.19
 

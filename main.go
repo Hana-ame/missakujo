@@ -3,9 +3,10 @@ package main
 import (
 	"io"
 	"log"
-	"missakujo/utils"
 	"os"
 	"time"
+
+	"github.com/hana-ame/missakujo/utils"
 
 	"github.com/gofiber/fiber/v2"
 )
