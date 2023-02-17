@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from "vue"
 import { NSpace, NInput, NDatePicker, NCheckbox, NButton } from "naive-ui"
 // import Date from "date"
+const BASE = "/api-pack/missakujo"
 
 const acct = ref("")
 const userId = ref("")
@@ -29,14 +30,16 @@ const renotesLessThan = ref("999")
 //   }
 // })
 
+const logHRef = ref("")
+
 function handleDelete(){
   let since = range.value[0]
   let until = range.value[1]
   let rnLessThan = Number(renotesLessThan.value)
   let obj = {    
-    "host": host.value,
-    "user": userId.value,
-    "token": token.value,
+    "host": host.value.trim(),
+    "user": userId.value.trim(),
+    "token": token.value.trim(),
     "since": since,
     "until": until,
 
@@ -48,7 +51,7 @@ function handleDelete(){
   }
   console.log(JSON.stringify(obj))
 
-  fetch("/delete",{
+  fetch(BASE + "/delete",{
     method:"POST",
     headers:{
       "Content-Type":"application/json"
@@ -57,11 +60,12 @@ function handleDelete(){
   }).then(res => res.json()).then(data => {
     if (data.sessionID == "") { return }
     // setInterval(() => {      
-    //   fetch("/log/" + data.sessionID)
-    //     .then(res => res.text())
-    //     .then(data => {
-    //       logTxt.value = data
-    //     })
+      fetch("/log/" + data.sessionID)
+        .then(res => res.text())
+        .then(data => {
+          // logTxt.value = data
+        })
+      logHRef.value = "/log/" + data.sessionID
     // }, 2000)
   })  
 }
@@ -71,7 +75,7 @@ const loading = ref(false)
 function handleChange() {
   loading.value = true
   userId.value = "Loading..."
-  fetch("/webfinger/" + acct.value).then(res => res.json()).then(data => {
+  fetch(BASE + "/webfinger/" + acct.value).then(res => res.json()).then(data => {
     userId.value = data.userId
     loading.value = false
   }).catch(err => {
@@ -163,6 +167,7 @@ const logTxt = ref("")
       Sakujo!
     </n-button>
   </n-space>
+  <a v-if="logHRef" :href="logHRef">{{ logHRef }}</a>
   <pre>{{ logTxt }}</pre>
 
 </template>
