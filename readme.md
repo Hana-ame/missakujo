@@ -20,3 +20,15 @@ then create token, you will get your token (it's a string in random charaters)
 
 
 [Download .exe file](https://github.com/Hana-ame/missakujo/releases/tag/v0.0.0)
+
+# test
+
+```sh
+go build .
+./missakujo
+
+cd frontend 
+npm run dev
+```
+
+
