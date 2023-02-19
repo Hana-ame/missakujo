@@ -2,7 +2,7 @@
 import { ref, computed, onMounted } from "vue"
 import { NSpace, NInput, NDatePicker, NCheckbox, NButton } from "naive-ui"
 // import Date from "date"
-const BASE = "/api-pack/missakujo"
+const BASE = "/api-missakujo"
 
 const acct = ref("")
 const userId = ref("")
@@ -167,7 +167,7 @@ const logTxt = ref("")
       Sakujo!
     </n-button>
   </n-space>
-  <a v-if="logHRef" :href="logHRef">{{ logHRef }}</a>
+  <a v-if="logHRef" :href="logHRef+'.txt'">{{ logHRef }}</a>
   <pre>{{ logTxt }}</pre>
 
 </template>

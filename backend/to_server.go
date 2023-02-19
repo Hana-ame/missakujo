@@ -35,13 +35,13 @@ func Wrapper(ctx *DelReqCtx) string {
 	// 	return err.Error()
 	// }
 
-	offset := ctx.TimeOffset
+	// offset := ctx.TimeOffset
 
 	sinceInt := int64(ctx.Since) // .UnixMilli()
 	untilInt := int64(ctx.Until) // .UnixMilli()
 
-	sinceInt -= int64(offset) * 1000
-	untilInt -= int64(offset) * 1000
+	// sinceInt -= int64(offset) * 1000
+	// untilInt -= int64(offset) * 1000
 
 	b2s := func(b bool) string {
 		if b {
