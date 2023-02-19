@@ -1,5 +1,15 @@
 for misskey only
 
+https://moonchan.xyz/missakujo/
+
+一時期のnotesを削除する (something like twitter delete)
+
+used for delete notes in one period of time.
+
+(fill the first blank and the second and the third will be filled automaticly.)
+
+----
+
 you can find your userId here
 `https://[instanceDomain]/settings/account-info`
 
