@@ -2,7 +2,7 @@
 import { ref, computed, onMounted } from "vue"
 import { NSpace, NInput, NDatePicker, NCheckbox, NButton } from "naive-ui"
 // import Date from "date"
-const BASE = "/api-pack/missakujo"
+const BASE = "/api-missakujo"
 
 const acct = ref("")
 const userId = ref("")
@@ -136,7 +136,7 @@ const logTxt = ref("")
     <!-- {{ userId +"@"+ host }} -->
     
     <div v-if="host.includes('.')">
-    create api token <a :href="'https://'+host+'/settings/api'">here</a>.
+    create api token <a :href="'https://'+host+'/settings/api'" target="_blank">here</a>.
     choose 'ノートを作成、削除する'
     </div>
     <n-input
@@ -167,7 +167,8 @@ const logTxt = ref("")
       Sakujo!
     </n-button>
   </n-space>
-  <a v-if="logHRef" :href="logHRef">{{ logHRef }}</a>
+  <p v-if="logHRef">Click here to show return log <a :href="logHRef">{{ logHRef }}</a></p>
+  <!-- <a v-if="logHRef" :href="logHRef">{{ logHRef }}</a> -->
   <pre>{{ logTxt }}</pre>
 
 </template>
