@@ -1,6 +1,6 @@
 for misskey only
 
-https://moonchan.xyz/missakujo/
+
 
 一時期のnotesを削除する (something like twitter delete)
 
